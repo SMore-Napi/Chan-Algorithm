@@ -64,7 +64,7 @@ public class Sorter {
         if (Calculation.getCorner(minPoint, a) < Calculation.getCorner(minPoint, b)) {
             return true;
         } else if (Calculation.getCorner(minPoint, a) == Calculation.getCorner(minPoint, b)) {
-            return (a.x < b.x);
+            return (a.getX() < b.getX());
         } else {
             return false;
         }

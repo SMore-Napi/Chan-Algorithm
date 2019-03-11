@@ -2,6 +2,8 @@ package calculation;
 
 import elementsStructure.Point;
 
+import java.util.Stack;
+
 /**
  * This class contains static calculation methods for the array
  */
@@ -27,10 +29,10 @@ public class ArrayHelper {
      * @return point with minimal X value
      */
     public static int findMinX(Point[] points) {
-        int min = points[0].x;
+        int min = points[0].getX();
         for (int i = 1; i < points.length; i++) {
-            if (points[i].x < min) {
-                min = points[i].x;
+            if (points[i].getX() < min) {
+                min = points[i].getX();
             }
         }
         return min;
@@ -42,10 +44,10 @@ public class ArrayHelper {
      * @return point with maximal X value
      */
     public static int findMaxX(Point[] points) {
-        int max = points[0].x;
+        int max = points[0].getX();
         for (int i = 1; i < points.length; i++) {
-            if (points[i].x > max) {
-                max = points[i].x;
+            if (points[i].getX() > max) {
+                max = points[i].getX();
             }
         }
         return max;
@@ -57,10 +59,10 @@ public class ArrayHelper {
      * @return point with minimal Y value
      */
     public static int findMinY(Point[] points) {
-        int min = points[0].y;
+        int min = points[0].getY();
         for (int i = 1; i < points.length; i++) {
-            if (points[i].y < min) {
-                min = points[i].y;
+            if (points[i].getY() < min) {
+                min = points[i].getY();
             }
         }
         return min;
@@ -72,10 +74,10 @@ public class ArrayHelper {
      * @return point with maximal Y value
      */
     public static int findMaxY(Point[] points) {
-        int max = points[0].y;
+        int max = points[0].getY();
         for (int i = 1; i < points.length; i++) {
-            if (points[i].y > max) {
-                max = points[i].y;
+            if (points[i].getY() > max) {
+                max = points[i].getY();
             }
         }
         return max;

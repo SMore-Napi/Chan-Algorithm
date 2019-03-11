@@ -27,8 +27,8 @@ public class Input {
         while (scanner.hasNext()) {
 
             Point point = new Point();
-            point.x = scanner.nextInt();
-            point.y = scanner.nextInt();
+            point.setX(scanner.nextInt());
+            point.setY(scanner.nextInt());
 
             // Extends the array if it is full
             if (iPoint == points.length) {

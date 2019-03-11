@@ -11,8 +11,8 @@ public class Calculation {
      * @return value of the corner
      */
     public static double getCorner(Point a, Point b) {
-        double y = b.y - a.y;
-        double x = b.x - a.x;
+        double y = b.getY() - a.getY();
+        double x = b.getX() - a.getX();
 
         return Math.atan2(y, x);
     }
