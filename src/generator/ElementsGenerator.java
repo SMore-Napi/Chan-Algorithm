@@ -10,6 +10,7 @@ public class ElementsGenerator {
 
     private final int STEP_COUNT_ELEM = 100; // The value of increasing count of elements
     private final int COUNT_SETS = 90; // Count of sets
+    private final int MAX_VALUE = 1000; // Count of sets
     private String pathName;
     private int number; // The number of the current set
 
@@ -40,8 +41,8 @@ public class ElementsGenerator {
         PrintWriter printWriter = new PrintWriter(new File(pathName + number + ".txt"));
 
         for (int i = 0; i < countElem; i++) {
-            // generate the element's value (-1000; 1000)
-            int value = Calculation.getRandomNumber(1000);
+            // generate the element's value (-MAX_VALUE; MAX_VALUE)
+            int value = Calculation.getRandomNumber(MAX_VALUE);
             printWriter.print(value + " ");
         }
 

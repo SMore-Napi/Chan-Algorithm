@@ -30,6 +30,18 @@ public class Output {
         printWriter.close();
     }
 
+    public static void printStack(Stack<Point> hull, int number) throws FileNotFoundException {
+
+        PrintWriter printWriter = new PrintWriter(new File(pathname + number + ".txt"));
+        Stack<Point> hullToPrint = new Stack<>();
+        hullToPrint.addAll(hull);
+        while (!hullToPrint.isEmpty()) {
+            printWriter.println(hullToPrint.pop().toString());
+        }
+        printWriter.close();
+    }
+
+
     /**
      * Creates the image to show points on the plane
      *
@@ -39,7 +51,6 @@ public class Output {
      */
     public static void printImage(Point[] inputPoints, int number) throws IOException {
         ImageFile image = new ImageFile(inputPoints);
-        image.create();
         saveImage(image.toBufferedImage(), number);
     }
 
@@ -52,9 +63,8 @@ public class Output {
      * @param number      the number of the set
      * @throws IOException
      */
-    public static void printImage(Point[] inputPoints, Stack hull, int number) throws IOException {
+    public static void printImage(Point[] inputPoints, Stack<Point> hull, int number) throws IOException {
         ImageFile image = new ImageFile(inputPoints, hull);
-        image.create();
         saveImage(image.toBufferedImage(), number);
     }
 
