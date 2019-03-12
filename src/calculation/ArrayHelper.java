@@ -2,8 +2,6 @@ package calculation;
 
 import elementsStructure.Point;
 
-import java.util.Stack;
-
 /**
  * This class contains static calculation methods for the array
  */
@@ -81,5 +79,29 @@ public class ArrayHelper {
             }
         }
         return max;
+    }
+
+    /**
+     * Finds the minimal element which is to the left and below others
+     *
+     * @return the minimal point
+     */
+    public static Point placeMinPoint(Point [] points, int minPointIndex) {
+        Point minPoint = new Point(points[0].getX(), points[0].getY());
+        int index = 0;
+        for (int i = 1; i < points.length; i++) {
+            if ((points[i].getX() < minPoint.getX()) || ((points[i].getX() == minPoint.getX()) && (points[i].getY() < minPoint.getY()))) {
+                minPoint.setX(points[i].getX());
+                minPoint.setY(points[i].getY());
+                index = i;
+            }
+        }
+
+        // Places the minimal point to the array[minPointIndex]
+        Point temp = points[minPointIndex];
+        points[minPointIndex] = minPoint;
+        points[index] = temp;
+
+        return minPoint;
     }
 }

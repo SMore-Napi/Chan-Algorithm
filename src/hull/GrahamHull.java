@@ -1,5 +1,6 @@
 package hull;
 
+import calculation.ArrayHelper;
 import elementsStructure.Point;
 
 import java.util.Stack;
@@ -28,8 +29,8 @@ public class GrahamHull {
 
         points = inputPoints;
 
-        // Finds the minimal point
-        minPoint = findLeftElement();
+        // Finds the minimal point and places it to the end of the array
+        minPoint = ArrayHelper.placeMinPoint(points,points.length - 1);
 
         // Sorts other points relatively the minimal point
         sortPointsByCorner(points, minPoint);
@@ -100,30 +101,5 @@ public class GrahamHull {
         } else {
             return false;
         }
-    }
-
-
-    /**
-     * Finds the minimal element which is to the left and below others
-     *
-     * @return the minimal point
-     */
-    private static Point findLeftElement() {
-        Point minPoint = new Point(points[0].getX(), points[0].getY());
-        int index = 0;
-        for (int i = 1; i < points.length; i++) {
-            if ((points[i].getX() < minPoint.getX()) || ((points[i].getX() == minPoint.getX()) && (points[i].getY() < minPoint.getY()))) {
-                minPoint.setX(points[i].getX());
-                minPoint.setY(points[i].getY());
-                index = i;
-            }
-        }
-
-        // Places the minimal point to the end of array
-        Point temp = points[points.length - 1];
-        points[points.length - 1] = minPoint;
-        points[index] = temp;
-
-        return minPoint;
     }
 }
