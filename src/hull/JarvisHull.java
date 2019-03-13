@@ -8,8 +8,9 @@ import java.util.Stack;
 import static calculation.Calculation.getLengthBetweenPoints;
 
 public class JarvisHull {
-
-    private static Point[] points;
+    private static Point[][] points;
+    private static int max;
+    private static int m;
 
     /**
      * Build the hull from input points
@@ -18,11 +19,17 @@ public class JarvisHull {
      * @return hull
      * @throws IllegalStateException
      */
-    public static Stack<Point> getJarvisHull(Point[] inputPoints) throws IllegalStateException {
+    public static Stack<Point> getJarvisHull(Point[][] inputPoints, int maxStepsCount) {
 
-        // Trows exception if count of point is less than 3
-        if (inputPoints.length < 3) {
-            throw new IllegalStateException("point's count is less than 3");
+        max = maxStepsCount;
+        m = 0;
+        // if there is only one group then return whole group
+        if (inputPoints.length == 1) {
+            Stack<Point> hull = new Stack<>();
+            for (int i = 0; i < inputPoints[0].length; i++) {
+                hull.push(inputPoints[0][i]);
+            }
+            return hull;
         }
 
         points = inputPoints;
@@ -36,52 +43,88 @@ public class JarvisHull {
      *
      * @return stack which contains the hull
      */
-    public static Stack<Point> buildHull() {
+
+    private static Stack<Point> buildHull() {
         Stack<Point> hull = new Stack<>();
 
         // Finds the minimal point and places it to the end of the array
-        Point firstPoint = ArrayHelper.placeMinPoint(points, points.length-1);
-        Point currentPoint = firstPoint;
-        hull.push(firstPoint);
+        Point startPoint = ArrayHelper.findMinPoint(points);
 
-        // Scans all points
-        for (int i = 0; i < points.length - 1; i++) {
-            Point minPoint = points[i];
-            int index = i;
+        Point currentPoint = startPoint;
+        hull.push(startPoint);
 
-            // Finds the next minimal point
-            for (int j = i + 1; j < points.length; j++) {
-                double vectorComparator = compareTwoVectors(currentPoint, minPoint, currentPoint, points[j]);
-                // if this point has less polar corner than minimal point
+
+        while (true) {
+            // Algorithm made more than max steps
+            if (m > max) {
+                hull = null;
+                break;
+            }
+            m++;
+
+            Point minPoint = findMinimalPointGroup(currentPoint, points[1]);
+
+            // Scans and finds minimal point in every group
+            for (int i = 0; i < points.length; i++) {
+
+                Point minPointGroup = findMinimalPointGroup(currentPoint, points[i]);
+
+                // Compares with currentPoint
+                double vectorComparator = compareTwoVectors(currentPoint, minPoint, currentPoint, minPointGroup);
+
+                // if this point has less polar corner than minPoint then it becomes a minimal Point
                 if (vectorComparator < 0) {
-                    minPoint = points[j];
-                    index = j;
+                    minPoint = minPointGroup;
                 }
                 // if this point has the same polar corner but is placed farther than minimal point
                 else if (vectorComparator == 0) {
-                    if (getLengthBetweenPoints(currentPoint, minPoint) < getLengthBetweenPoints(currentPoint, points[j])) {
-                        minPoint = points[j];
-                        index = j;
+                    if (getLengthBetweenPoints(currentPoint, minPoint) < getLengthBetweenPoints(currentPoint, minPointGroup)) {
+                        minPoint = minPointGroup;
                     }
                 }
+
             }
 
-            // Compares if the border is going to be closed
-            if (!currentPoint.equals(firstPoint)) {
-                if (compareTwoVectors(currentPoint, minPoint, currentPoint, firstPoint) <= 0) {
-                    break;
-                }
+            // if hull is completed
+            if (minPoint.equals(startPoint)) {
+                break;
             }
 
             // Saves new minimal point
             currentPoint = minPoint;
             hull.push(minPoint);
 
-            Point temp = points[i];
-            points[i] = minPoint;
-            points[index] = temp;
+            System.out.println();
         }
         return hull;
+    }
+
+    /**
+     * Finds minimal point regarding current point in a group
+     * @param currentPoint finds regarding this current
+     * @param points group of points
+     * @return minimal point
+     */
+    private static Point findMinimalPointGroup(Point currentPoint, Point[] points) {
+
+        Point minPoint = points[0];
+
+        for (int i = 1; i < points.length; i++) {
+
+            double vectorComparator = compareTwoVectors(currentPoint, minPoint, currentPoint, points[i]);
+            // if this point has less polar corner than minimal point
+            if (vectorComparator < 0) {
+                minPoint = points[i];
+            }
+            // if this point has the same polar corner but is placed farther than minimal point
+            else if (vectorComparator == 0) {
+                if (getLengthBetweenPoints(currentPoint, minPoint) < getLengthBetweenPoints(currentPoint, points[i])) {
+                    minPoint = points[i];
+                }
+            }
+        }
+
+        return minPoint;
     }
 
     /**
