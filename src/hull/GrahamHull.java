@@ -20,17 +20,20 @@ public class GrahamHull {
      * @return hull
      * @throws IllegalStateException
      */
-    public static Stack<Point> getGrahamHull(Point[] inputPoints) throws IllegalStateException {
+    public static Stack<Point> getGrahamHull(Point[] inputPoints) {
 
-        // Trows exception if count of point is less than 3
         if (inputPoints.length < 3) {
-            throw new IllegalStateException("point's count is less than 3");
+            Stack<Point> hull = new Stack<>();
+            for (int i = 0; i < inputPoints.length; i++) {
+                hull.push(inputPoints[i]);
+            }
+            return hull;
         }
 
         points = inputPoints;
 
         // Finds the minimal point and places it to the end of the array
-        minPoint = ArrayHelper.placeMinPoint(points,points.length - 1);
+        minPoint = ArrayHelper.placeMinPoint(points, points.length - 1);
 
         // Sorts other points relatively the minimal point
         sortPointsByCorner(points, minPoint);
@@ -75,7 +78,7 @@ public class GrahamHull {
             Point pTemp = line.pop();
 
             // Checks if stack had two points on previous iteration
-            if (line.isEmpty()){
+            if (line.isEmpty()) {
                 line.push(pTemp);
                 line.push(pNew);
                 break;
