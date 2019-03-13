@@ -1,21 +1,27 @@
-package tests;
+package test.testsMain;
 
 import elementsStructure.Point;
-import hull.GrahamHull;
+import hull.ChanHull;
 import io.Input;
 import io.Output;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Stack;
 
-public class TestGrahamAlgorithmMain {
+/**
+ * Test the set1
+ */
+public class TestChanAlgorithmMain {
     public static void main(String[] args) throws IOException {
 
-        for (int i = 89; i <= 89; i++) {
+        for (int i = 30; i <= 90; i++) {
             Point[] inputPoints = Input.scannerArray(i);
-            Stack<Point> hull = GrahamHull.getGrahamHull(inputPoints);
+            //LinkedList<Point> inputPoints = Input.scannerLinkedList(i);
+            Stack<Point> hull = ChanHull.toChanHull(inputPoints);
             Output.printStack(hull, i);
             Output.printImage(inputPoints, hull, i);
+
         }
     }
 }

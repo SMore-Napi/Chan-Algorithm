@@ -1,6 +1,7 @@
 package hull;
 
 import calculation.ArrayHelper;
+import elementsStructure.Iterator;
 import elementsStructure.Point;
 
 import java.util.Stack;
@@ -74,6 +75,7 @@ public class GrahamHull {
         boolean changed;
 
         do {
+            Iterator.plus();
             Point pNew = line.pop();
             Point pTemp = line.pop();
 

@@ -1,5 +1,6 @@
 package calculation;
 
+import elementsStructure.Iterator;
 import elementsStructure.Point;
 
 public class Sorter {
@@ -19,6 +20,8 @@ public class Sorter {
     }
 
     private static void sort(Point[] points, int low, int high) {
+
+        Iterator.plus();
         if (low >= high) {
             return;
         }
@@ -32,10 +35,12 @@ public class Sorter {
         int i = low;
         int j = mid + 1;
         for (int k = low; k <= high; k++) {
+            Iterator.plus();
             helper[k] = points[k];
         }
         int k = low;
         while (i <= mid && j <= high) {
+            Iterator.plus();
             // if i's corner is less than j's corner
             if (compare(helper[i], helper[j])) {
                 points[k++] = helper[i++];
@@ -45,9 +50,11 @@ public class Sorter {
         }
         // выписываем подряд из левой части, если остались
         while (i <= mid) {
+            Iterator.plus();
             points[k++] = helper[i++];
         }
         while (j <= high) {
+            Iterator.plus();
             points[k++] = helper[j++];
         }
     }

@@ -1,5 +1,6 @@
 package calculation;
 
+import elementsStructure.Iterator;
 import elementsStructure.Point;
 
 /**
@@ -90,6 +91,7 @@ public class ArrayHelper {
         Point minPoint = new Point(points[0].getX(), points[0].getY());
         int index = 0;
         for (int i = 1; i < points.length; i++) {
+            Iterator.plus();
             if ((points[i].getX() < minPoint.getX()) || ((points[i].getX() == minPoint.getX()) && (points[i].getY() < minPoint.getY()))) {
                 minPoint.setX(points[i].getX());
                 minPoint.setY(points[i].getY());
@@ -117,6 +119,7 @@ public class ArrayHelper {
         Point minPoint = new Point(points[0][points[0].length-1].getX(), points[0][points[0].length-1].getY());
 
         for (int i = 1; i < points.length; i++) {
+            Iterator.plus();
             if ((points[i][points[i].length-1].getX() < minPoint.getX()) || ((points[i][points[i].length-1].getX() == minPoint.getX()) && (points[i][points[i].length-1].getY() < minPoint.getY()))) {
                 minPoint.setX(points[i][points[i].length-1].getX());
                 minPoint.setY(points[i][points[i].length-1].getY());

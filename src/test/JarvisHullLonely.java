@@ -1,4 +1,4 @@
-package hull;
+package test;
 
 import calculation.ArrayHelper;
 import elementsStructure.Point;

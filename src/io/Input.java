@@ -5,6 +5,7 @@ import elementsStructure.Point;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Input {
@@ -44,5 +45,22 @@ public class Input {
             arrayToReturn[i] = points[i];
         }
         return arrayToReturn;
+    }
+
+    public static LinkedList<Point> scannerLinkedList(int setNumber) throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File(pathName + setNumber + ".txt"));
+
+        LinkedList<Point> points = new LinkedList<>();
+
+        while (scanner.hasNext()) {
+
+            Point point = new Point();
+            point.setX(scanner.nextInt());
+            point.setY(scanner.nextInt());
+
+            points.add(point);
+        }
+
+        return points;
     }
 }

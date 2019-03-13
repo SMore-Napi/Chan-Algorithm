@@ -1,6 +1,7 @@
 package hull;
 
 import calculation.ArrayHelper;
+import elementsStructure.Iterator;
 import elementsStructure.Point;
 
 import java.util.Stack;
@@ -11,6 +12,7 @@ public class JarvisHull {
     private static Point[][] points;
     private static int max;
     private static int m;
+    private static int r;
 
     /**
      * Build the hull from input points
@@ -66,6 +68,7 @@ public class JarvisHull {
 
             // Scans and finds minimal point in every group
             for (int i = 0; i < points.length; i++) {
+                Iterator.plus();
 
                 Point minPointGroup = findMinimalPointGroup(currentPoint, points[i]);
 
@@ -93,16 +96,15 @@ public class JarvisHull {
             // Saves new minimal point
             currentPoint = minPoint;
             hull.push(minPoint);
-
-            System.out.println();
         }
         return hull;
     }
 
     /**
      * Finds minimal point regarding current point in a group
+     *
      * @param currentPoint finds regarding this current
-     * @param points group of points
+     * @param points       group of points
      * @return minimal point
      */
     private static Point findMinimalPointGroup(Point currentPoint, Point[] points) {
@@ -110,6 +112,7 @@ public class JarvisHull {
         Point minPoint = points[0];
 
         for (int i = 1; i < points.length; i++) {
+            //Iterator.plus();
 
             double vectorComparator = compareTwoVectors(currentPoint, minPoint, currentPoint, points[i]);
             // if this point has less polar corner than minimal point
@@ -124,7 +127,25 @@ public class JarvisHull {
             }
         }
 
+
         return minPoint;
+    }
+
+    private static Point minPointComparator(Point currentPoint, Point a, Point b) {
+        double vectorComparator = compareTwoVectors(currentPoint, a, currentPoint, b);
+        if (vectorComparator < 0) {
+            return b;
+        }
+        // if this point has the same polar corner but is placed farther than minimal point
+        else if (vectorComparator == 0) {
+            if (getLengthBetweenPoints(currentPoint, a) < getLengthBetweenPoints(currentPoint, b)) {
+                return b;
+            } else {
+                return a;
+            }
+        } else {
+            return a;
+        }
     }
 
     /**

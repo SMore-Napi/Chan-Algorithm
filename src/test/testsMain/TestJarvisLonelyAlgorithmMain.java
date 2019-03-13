@@ -1,24 +1,20 @@
-package tests;
+package test.testsMain;
 
 import elementsStructure.Point;
-import hull.ChanHull;
+import test.JarvisHullLonely;
 import io.Input;
 import io.Output;
 
 import java.io.IOException;
 import java.util.Stack;
 
-/**
- * Test the set1
- */
-public class TestChanAlgorithmMain {
+public class TestJarvisLonelyAlgorithmMain {
     public static void main(String[] args) throws IOException {
-
-        for (int i = 1; i <= 90; i++) {
+        for (int i = 1; i <= 1; i++) {
             Point[] inputPoints = Input.scannerArray(i);
-            Stack<Point> hull = ChanHull.toChanHull(inputPoints);
+            Stack<Point> hull = JarvisHullLonely.getJarvisHull(inputPoints);
             Output.printStack(hull, i);
-            //Output.printImage(inputPoints, hull, i);
+           Output.printImage(inputPoints, hull, i);
         }
     }
 }

@@ -2,6 +2,7 @@ package hull;
 
 import elementsStructure.Point;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class ChanHull {
@@ -11,7 +12,7 @@ public class ChanHull {
     /**
      * The main algorithm
      *
-     * @param inputPoints
+     * @param inputPoints array of input points
      * @return hull
      */
     public static Stack<Point> toChanHull(Point[] inputPoints) {
@@ -25,6 +26,25 @@ public class ChanHull {
         }
 
         return hull;
+    }
+
+    /**
+     * The main algorithm
+     * @param inputPoints linked list of input points
+     * @return hull
+     */
+    public static Stack<Point> toChanHull(LinkedList<Point> inputPoints) {
+
+        LinkedList<Point> pointsList = new LinkedList<>(inputPoints);
+        Point [] points = new Point[pointsList.size()];
+        int k = 0;
+
+        while(!pointsList.isEmpty()){
+            points[k] = pointsList.pop();
+            k++;
+        }
+
+        return toChanHull(points);
     }
 
     /**
