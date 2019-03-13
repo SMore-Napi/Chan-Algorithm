@@ -8,15 +8,19 @@ import java.io.PrintWriter;
 
 public class ElementsGenerator {
 
-    private final int STEP_COUNT_ELEM = 100; // The value of increasing count of elements
-    private final int COUNT_SETS = 90; // Count of sets
-    private final int MAX_VALUE = 1000; // Count of sets
+    private int stepCountElem; // The value of increasing count of elements
+    private int countSets; // Count of sets
+    private int maxValue; // Count of sets
     private String pathName;
     private int number; // The number of the current set
 
-    public ElementsGenerator() {
+    public ElementsGenerator(int stepCountElem, int countSets, int maxValue) {
         pathName = "/Users/smore/Projects/Java/Semester Project/Chan Algorithm/sets/set";
         number = 1;
+
+        this.stepCountElem = stepCountElem;
+        this.countSets = countSets;
+        this.maxValue = maxValue;
     }
 
     /**
@@ -25,7 +29,7 @@ public class ElementsGenerator {
      * @throws FileNotFoundException
      */
     public void generate() throws FileNotFoundException {
-        for (int i = STEP_COUNT_ELEM; i <= STEP_COUNT_ELEM * COUNT_SETS; i += STEP_COUNT_ELEM) {
+        for (int i = stepCountElem; i <= stepCountElem * countSets; i += stepCountElem) {
             generateSet(i);
             number++;
         }
@@ -42,7 +46,7 @@ public class ElementsGenerator {
 
         for (int i = 0; i < countElem; i++) {
             // generate the element's value (-MAX_VALUE; MAX_VALUE)
-            int value = Calculation.getRandomNumber(MAX_VALUE);
+            int value = Calculation.getRandomNumber(maxValue);
             printWriter.print(value + " ");
         }
 
