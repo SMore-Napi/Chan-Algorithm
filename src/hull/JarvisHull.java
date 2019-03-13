@@ -5,6 +5,8 @@ import elementsStructure.Point;
 
 import java.util.Stack;
 
+import static calculation.Calculation.getLengthBetweenPoints;
+
 public class JarvisHull {
 
     private static Point[] points;
@@ -31,33 +33,42 @@ public class JarvisHull {
 
     /**
      * Finds border points
+     *
      * @return stack which contains the hull
      */
     public static Stack<Point> buildHull() {
         Stack<Point> hull = new Stack<>();
 
-        // Finds the minimal point and places it to the begin of the array
-        Point firstPoint = ArrayHelper.placeMinPoint(points, 0);
+        // Finds the minimal point and places it to the end of the array
+        Point firstPoint = ArrayHelper.placeMinPoint(points, points.length-1);
         Point currentPoint = firstPoint;
         hull.push(firstPoint);
 
         // Scans all points
-        for (int i = 1; i < points.length - 1; i++) {
+        for (int i = 0; i < points.length - 1; i++) {
             Point minPoint = points[i];
             int index = i;
 
             // Finds the next minimal point
             for (int j = i + 1; j < points.length; j++) {
-                if (compareTwoVectors(currentPoint, minPoint, currentPoint, points[j]) < 0) {
+                double vectorComparator = compareTwoVectors(currentPoint, minPoint, currentPoint, points[j]);
+                // if this point has less polar corner than minimal point
+                if (vectorComparator < 0) {
                     minPoint = points[j];
                     index = j;
                 }
-
+                // if this point has the same polar corner but is placed farther than minimal point
+                else if (vectorComparator == 0) {
+                    if (getLengthBetweenPoints(currentPoint, minPoint) < getLengthBetweenPoints(currentPoint, points[j])) {
+                        minPoint = points[j];
+                        index = j;
+                    }
+                }
             }
 
             // Compares if the border is going to be closed
             if (!currentPoint.equals(firstPoint)) {
-                if (compareTwoVectors(currentPoint, minPoint, currentPoint, firstPoint) < 0) {
+                if (compareTwoVectors(currentPoint, minPoint, currentPoint, firstPoint) <= 0) {
                     break;
                 }
             }
@@ -70,7 +81,6 @@ public class JarvisHull {
             points[i] = minPoint;
             points[index] = temp;
         }
-
         return hull;
     }
 

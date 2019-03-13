@@ -46,4 +46,8 @@ public class Calculation {
 
         return value;
     }
+
+    public static double getLengthBetweenPoints(Point a, Point b){
+        return Math.sqrt((a.getX()-b.getX())*(a.getX()-b.getX()) + (a.getY()-b.getY())*(a.getY()-b.getY()));
+    }
 }

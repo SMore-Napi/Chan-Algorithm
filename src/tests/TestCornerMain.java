@@ -5,6 +5,7 @@ import elementsStructure.Point;
 
 public class TestCornerMain {
     public static void main(String[] args) {
+
         Point a = new Point(0, 0);
         Point b = new Point(1, -5);
         Point c = new Point(3, -3);
@@ -21,6 +22,9 @@ public class TestCornerMain {
         System.out.println(Calculation.getCorner(a, f));
         System.out.println(Calculation.getCorner(a, g));
         System.out.println(Calculation.getCorner(a, h));
+
+
+
 
     }
 }

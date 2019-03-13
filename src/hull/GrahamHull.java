@@ -54,6 +54,7 @@ public class GrahamHull {
         // Pushes two first points
         line.push(points[0]);
         line.push(points[1]);
+        rebuildLine();
 
         for (int i = 2; i < points.length - 1; i++) {
             line.push(points[i]);
@@ -72,6 +73,13 @@ public class GrahamHull {
         do {
             Point pNew = line.pop();
             Point pTemp = line.pop();
+
+            // Checks if stack had two points on previous iteration
+            if (line.isEmpty()){
+                line.push(pTemp);
+                line.push(pNew);
+                break;
+            }
             Point pOld = line.peek();
 
             if (!isLeftRotate(pOld, pTemp, pNew)) {
@@ -96,10 +104,6 @@ public class GrahamHull {
      */
     private static boolean isLeftRotate(Point pOld, Point pTemp, Point pNew) {
         double value = (pTemp.getX() - pOld.getX()) * (pNew.getY() - pTemp.getY()) - (pTemp.getY() - pOld.getY()) * (pNew.getX() - pTemp.getX());
-        if (value >= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return value > 0;
     }
 }
