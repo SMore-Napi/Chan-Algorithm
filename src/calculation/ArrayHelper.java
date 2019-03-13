@@ -98,9 +98,30 @@ public class ArrayHelper {
         }
 
         // Places the minimal point to the array[minPointIndex]
+
         Point temp = points[minPointIndex];
         points[minPointIndex] = minPoint;
         points[index] = temp;
+
+        return minPoint;
+    }
+
+    /**
+     * Finds the minimal element which is to the left and below others
+     * Looks only last element in points[i][last]
+     * @param points
+     * @return minimal point
+     */
+    public static Point findMinPoint(Point [][] points){
+
+        Point minPoint = new Point(points[0][points[0].length-1].getX(), points[0][points[0].length-1].getY());
+
+        for (int i = 1; i < points.length; i++) {
+            if ((points[i][points[i].length-1].getX() < minPoint.getX()) || ((points[i][points[i].length-1].getX() == minPoint.getX()) && (points[i][points[i].length-1].getY() < minPoint.getY()))) {
+                minPoint.setX(points[i][points[i].length-1].getX());
+                minPoint.setY(points[i][points[i].length-1].getY());
+            }
+        }
 
         return minPoint;
     }

@@ -1,21 +1,20 @@
 package tests;
 
 import elementsStructure.Point;
-import hull.GrahamHull;
+import hull.JarvisHullLonely;
 import io.Input;
 import io.Output;
 
 import java.io.IOException;
 import java.util.Stack;
 
-public class TestGrahamAlgorithmMain {
+public class TestJarvisLonelyAlgorithmMain {
     public static void main(String[] args) throws IOException {
-
-        for (int i = 89; i <= 89; i++) {
+        for (int i = 1; i <= 1; i++) {
             Point[] inputPoints = Input.scannerArray(i);
-            Stack<Point> hull = GrahamHull.getGrahamHull(inputPoints);
+            Stack<Point> hull = JarvisHullLonely.getJarvisHull(inputPoints);
             Output.printStack(hull, i);
-            Output.printImage(inputPoints, hull, i);
+           Output.printImage(inputPoints, hull, i);
         }
     }
 }
