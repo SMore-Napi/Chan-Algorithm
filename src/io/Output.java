@@ -13,7 +13,7 @@ import java.util.Stack;
 
 public class Output {
 
-    private static String pathname = "/Users/smore/Projects/Java/Semester Project/Chan Algorithm/output/set";
+    private static String pathname = "output/set";
 
     /**
      * Writes the output array into the file
@@ -76,7 +76,7 @@ public class Output {
      * @throws IOException
      */
     private static void saveImage(BufferedImage image, int number) throws IOException {
-        String pathname = "/Users/smore/Projects/Java/Semester Project/Chan Algorithm/outputImage/image" + number + ".jpg";
+        String pathname = "outputImage/image" + number + ".jpg";
         ImageIO.write(image, "jpg", new File(pathname));
     }
 }

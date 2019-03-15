@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Input {
 
-    private static String pathName = "/Users/smore/Projects/Java/Semester Project/Chan Algorithm/sets/set";
+    private static String pathName = "sets/set";
 
     /**
      * Reads from the file the current set

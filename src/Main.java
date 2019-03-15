@@ -1,3 +1,4 @@
+import calculation.Calculation;
 import elementsStructure.Iterator;
 import elementsStructure.Point;
 import hull.ChanHull;
@@ -15,7 +16,11 @@ import java.util.Stack;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        PrintWriter results = new PrintWriter(new File("/Users/smore/Projects/Java/Semester Project/Chan Algorithm/results.txt"));
+        String pathName = "results/";
+        PrintWriter resultsTime = new PrintWriter(new File(pathName + "time.txt"));
+        PrintWriter resultsIterations = new PrintWriter(new File(pathName + "iterations.txt"));
+        PrintWriter resultsN = new PrintWriter(new File(pathName + "n.txt"));
+        PrintWriter resultsH = new PrintWriter(new File(pathName + "h.txt"));
 
         // Scanning and printing result of every set
         for (int i = 1; i <= 90; i++) {
@@ -23,28 +28,29 @@ public class Main {
             // Input
             Point[] inputPoints = Input.scannerArray(i);
 
-            results.print(inputPoints.length + " ");
-
+            resultsN.println(inputPoints.length);
 
             // Timing an algorithm
-            long time = 0;
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 10; j++) {
                 Iterator.setEmpty();
+
                 long start = System.nanoTime();
                 hull = ChanHull.toChanHull(inputPoints);
                 long end = System.nanoTime();
 
-                time += end - start;
+                long time = end - start;
+                resultsTime.print(time + " ");
             }
-            time /= 3;
-            results.print(time + " ");
-            results.println(Iterator.get() + " ");
+
+            resultsTime.println();
+            resultsIterations.println(Iterator.get());
+            resultsH.println(Calculation.getStackLength(hull));
 
             Output.printStack(hull, i);
-
-
         }
-        results.close();
-
+        resultsTime.close();
+        resultsIterations.close();
+        resultsN.close();
+        resultsH.close();
     }
 }

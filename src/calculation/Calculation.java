@@ -2,6 +2,8 @@ package calculation;
 
 import elementsStructure.Point;
 
+import java.util.Stack;
+
 public class Calculation {
     /**
      * Calculates the corner between two points
@@ -49,5 +51,15 @@ public class Calculation {
 
     public static double getLengthBetweenPoints(Point a, Point b){
         return Math.sqrt((a.getX()-b.getX())*(a.getX()-b.getX()) + (a.getY()-b.getY())*(a.getY()-b.getY()));
+    }
+
+    public static long getStackLength(Stack stack){
+        Stack x = (Stack)stack.clone();
+        long length = 0;
+        while(!x.isEmpty()){
+            x.pop();
+            length++;
+        }
+        return length;
     }
 }

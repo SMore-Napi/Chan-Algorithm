@@ -15,7 +15,7 @@ public class ElementsGenerator {
     private int number; // The number of the current set
 
     public ElementsGenerator(int stepCountElem, int countSets, int maxValue) {
-        pathName = "/Users/smore/Projects/Java/Semester Project/Chan Algorithm/sets/set";
+        pathName = "sets/set";
         number = 1;
 
         this.stepCountElem = stepCountElem;
