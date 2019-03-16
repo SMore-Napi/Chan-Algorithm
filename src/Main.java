@@ -8,6 +8,7 @@ import io.Output;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -25,12 +26,17 @@ public class Main {
         // Scanning and printing result of every set
         for (int i = 1; i <= 90; i++) {
             Stack<Point> hull = new Stack<>();
-            // Input
-            Point[] inputPoints = Input.scannerArray(i);
 
+
+            // Input Array
+            Point[] inputPoints = Input.scannerArray(i);
             resultsN.println(inputPoints.length);
 
-            // Timing an algorithm
+            // Input Linked List
+            //LinkedList<Point> inputPoints = Input.scannerLinkedList(i);
+            //resultsN.println(inputPoints.size());
+
+            // Timing an algorithm 10 times
             for (int j = 0; j < 10; j++) {
                 Iterator.setEmpty();
 
